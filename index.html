@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Akash P — Python Developer, Backend Engineer & API Architect. Portfolio showcasing scalable backend systems, REST APIs, and enterprise solutions.">
+  <meta name="keywords" content="Akash P, portfolio, python developer, backend engineer, API architect, FastAPI, Flask">
+  <meta name="author" content="Akash P">
+  <title>Akash P — Python Developer & Backend Engineer</title>
+  <link rel="icon" href="assets/images/dp.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { renderApp } from './views/components.js';
+    import AppViewModel from './viewmodels/app.viewmodel.js';
+
+    // Render the full view
+    const app = document.getElementById('app');
+    renderApp(app);
+
+    // ─── Matrix code rain on hero canvas ─────────────────────
+    const canvas = document.getElementById('matrix-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let w, h, columns, drops;
+
+      const chars = '01アイウエオカキクケコ{}[]()<>=/+-*&|;:const let var def import class function async await return';
+
+      function initMatrix() {
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
+        const fontSize = 13;
+        columns = Math.floor(w / fontSize);
+        drops = Array(columns).fill(1);
+      }
+
+      function drawMatrix() {
+        ctx.fillStyle = 'rgba(30, 30, 30, 0.06)';
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.font = '12px JetBrains Mono, monospace';
+        const colors = ['#569cd6', '#4ec9b0', '#6a9955', '#dcdcaa', '#ce9178', '#c586c0'];
+
+        for (let i = 0; i < drops.length; i++) {
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+          ctx.fillText(char, i * 13, drops[i] * 13);
+
+          if (drops[i] * 13 > h && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+        requestAnimationFrame(drawMatrix);
+      }
+
+      initMatrix();
+      drawMatrix();
+      window.addEventListener('resize', initMatrix);
+    }
+
+    // Initialize the ViewModel
+    const vm = new AppViewModel();
+    vm.init();
+  </script>
+</body>
+</html>
