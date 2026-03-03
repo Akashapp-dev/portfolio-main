@@ -122,14 +122,17 @@ class AppViewModel {
     }
 
     try {
+      const formData = new FormData();
+      formData.append('name', name.value.trim());
+      formData.append('email', email.value.trim());
+      formData.append('message', message.value.trim());
+      formData.append('_captcha', 'false');
+      formData.append('_template', 'table');
+
       const res = await fetch(contactInfo.formAction, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          name: name.value.trim(),
-          email: email.value.trim(),
-          message: message.value.trim(),
-        }),
+        body: formData,
+        headers: { 'Accept': 'application/json' },
       });
 
       if (res.ok) {
