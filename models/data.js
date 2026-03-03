@@ -202,7 +202,7 @@ export const contactInfo = {
   phone: "+91 9363003443",
   phoneHours: "Mon to Fri 9am to 6pm",
   email: "akashbtechit@gmail.com",
-  formAction: "https://formsubmit.co/ajax/el/vufuxo",
+  formAction: "https://formsubmit.co/ajax/akashbtechit@gmail.com",
 };
 
 export const navItems = [
